@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ASCII"?>
+<device:XMLDevice xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:device="http://www.silabs.com/ss/hwconfig/document/device.ecore" name="EFM32GG942F1024" partId="mcu.arm.efm32.gg.efm32gg942f1024" contextId="com.silabs.sdk.stack.super:2.6.3._-449673605">
+  <mode name="DefaultMode">
+    <property object="DefaultMode" propertyId="mode.diagramLocation" value="100, 100"/>
+    <property object="PF2" propertyId="ports.settings.reserve" value="Not allowed"/>
+    <property object="PORTIO" propertyId="portio.usart0.enable.clk" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart0.enable.cs" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart0.enable.tx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.clk" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.cs" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.rx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.enable.tx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart1.location.usart1" value="1"/>
+    <property object="USART0" propertyId="ABPeripheral.included" value="true"/>
+    <property object="USART0" propertyId="USART.BSP_USART_CLK.PIN" value="PE12"/>
+    <property object="USART0" propertyId="USART.BSP_USART_CS.PIN" value="PE13"/>
+    <property object="USART0" propertyId="USART.BSP_USART_MOSI.PIN" value="PE10"/>
+    <property object="USART0" propertyId="USART.BSP_USART_TX.PIN" value="PE10"/>
+    <property object="USART0" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
+    <property object="USART1" propertyId="ABPeripheral.included" value="true"/>
+    <property object="USART1" propertyId="USART.BSP_USART_CLK.PIN" value="PD2"/>
+    <property object="USART1" propertyId="USART.BSP_USART_CS.PIN" value="PD3"/>
+    <property object="USART1" propertyId="USART.BSP_USART_MISO.PIN" value="PD1"/>
+    <property object="USART1" propertyId="USART.BSP_USART_MOSI.PIN" value="PD0"/>
+    <property object="USART1" propertyId="USART.BSP_USART_RX.PIN" value="PD1"/>
+    <property object="USART1" propertyId="USART.BSP_USART_TX.PIN" value="PD0"/>
+    <property object="USART1" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
+  </mode>
+  <modeTransition>
+    <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.source" value="RESET"/>
+    <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.target" value="DefaultMode"/>
+  </modeTransition>
+</device:XMLDevice>
