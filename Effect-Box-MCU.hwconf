@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
 <device:XMLDevice xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:device="http://www.silabs.com/ss/hwconfig/document/device.ecore" name="EFM32GG942F1024" partId="mcu.arm.efm32.gg.efm32gg942f1024" contextId="com.silabs.sdk.stack.super:2.6.3._-449673605">
   <mode name="DefaultMode">
+    <property object="BUTTON" propertyId="ABPeripheral.included" value="true"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON0.PIN" value="PA0"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON1.PIN" value="PA1"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON2.PIN" value="PA2"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON3.PIN" value="PA3"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON4.PIN" value="PA4"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON5.PIN" value="PA5"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON_COUNT.INT" value="6"/>
+    <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON_GPIO_MODE.ENUM" value="HAL_GPIO_MODE_INPUT_PULL"/>
     <property object="DefaultMode" propertyId="mode.diagramLocation" value="100, 100"/>
+    <property object="LED" propertyId="ABPeripheral.included" value="true"/>
+    <property object="LED" propertyId="LED.BSP_LED0.PIN" value="PB13"/>
+    <property object="LED" propertyId="LED.BSP_LED1.PIN" value="PB14"/>
     <property object="PF2" propertyId="ports.settings.reserve" value="Not allowed"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.clk" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.cs" value="Enabled"/>
@@ -11,6 +23,14 @@
     <property object="PORTIO" propertyId="portio.usart1.enable.rx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.tx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.location.usart1" value="1"/>
+    <property object="PORTIO" propertyId="portio.usart2.enable.clk" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart2.enable.cs" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart2.enable.rx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart2.enable.tx" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart2.location.usart2" value="1"/>
+    <property object="SPIDISPLAY" propertyId="ABPeripheral.included" value="true"/>
+    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_EXTCOMIN.PIN" value="PE11"/>
+    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_USART.MOD" value="USART0"/>
     <property object="USART0" propertyId="ABPeripheral.included" value="true"/>
     <property object="USART0" propertyId="USART.BSP_USART_CLK.PIN" value="PE12"/>
     <property object="USART0" propertyId="USART.BSP_USART_CS.PIN" value="PE13"/>
@@ -25,6 +45,14 @@
     <property object="USART1" propertyId="USART.BSP_USART_RX.PIN" value="PD1"/>
     <property object="USART1" propertyId="USART.BSP_USART_TX.PIN" value="PD0"/>
     <property object="USART1" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
+    <property object="USART2" propertyId="ABPeripheral.included" value="true"/>
+    <property object="USART2" propertyId="USART.BSP_USART_CLK.PIN" value="PB5"/>
+    <property object="USART2" propertyId="USART.BSP_USART_CS.PIN" value="PB6"/>
+    <property object="USART2" propertyId="USART.BSP_USART_MISO.PIN" value="PB4"/>
+    <property object="USART2" propertyId="USART.BSP_USART_MOSI.PIN" value="PB3"/>
+    <property object="USART2" propertyId="USART.BSP_USART_RX.PIN" value="PB4"/>
+    <property object="USART2" propertyId="USART.BSP_USART_TX.PIN" value="PB3"/>
+    <property object="USART2" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
   </mode>
   <modeTransition>
     <property object="RESET &#x2192; DefaultMode" propertyId="modeTransition.source" value="RESET"/>
