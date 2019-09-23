@@ -90,11 +90,11 @@
 // $[LED]
 #define BSP_LED_PRESENT                               (1)
 
-#define BSP_LED0_PIN                                  (13U)
-#define BSP_LED0_PORT                                 (gpioPortB)
+#define BSP_LED0_PIN                                  (4U)
+#define BSP_LED0_PORT                                 (gpioPortC)
 
-#define BSP_LED1_PIN                                  (14U)
-#define BSP_LED1_PORT                                 (gpioPortB)
+#define BSP_LED1_PIN                                  (5U)
+#define BSP_LED1_PORT                                 (gpioPortC)
 
 #define BSP_LED_COUNT                                 (2U)
 #define BSP_LED_INIT                                  { { BSP_LED0_PORT, BSP_LED0_PIN }, { BSP_LED1_PORT, BSP_LED1_PIN } }

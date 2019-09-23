@@ -12,8 +12,10 @@
     <property object="BUTTON" propertyId="BUTTON.BSP_BUTTON_GPIO_MODE.ENUM" value="HAL_GPIO_MODE_INPUT_PULL"/>
     <property object="DefaultMode" propertyId="mode.diagramLocation" value="100, 100"/>
     <property object="LED" propertyId="ABPeripheral.included" value="true"/>
-    <property object="LED" propertyId="LED.BSP_LED0.PIN" value="PB13"/>
-    <property object="LED" propertyId="LED.BSP_LED1.PIN" value="PB14"/>
+    <property object="LED" propertyId="LED.BSP_LED0.PIN" value="PC4"/>
+    <property object="LED" propertyId="LED.BSP_LED1.PIN" value="PC5"/>
+    <property object="PB13" propertyId="ports.settings.reserve" value="Not allowed"/>
+    <property object="PB14" propertyId="ports.settings.reserve" value="Not allowed"/>
     <property object="PF2" propertyId="ports.settings.reserve" value="Not allowed"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.clk" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.cs" value="Enabled"/>

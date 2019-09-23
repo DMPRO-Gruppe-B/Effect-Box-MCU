@@ -182,7 +182,7 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 	</storageModule>
-	<storageModule moduleId="com.silabs.ss.framework.ide.project.core.cpp" project.generation="39" projectCommon.boardIds="com.silabs.board.none:0.0.0" projectCommon.buildArtifactType="EXE" projectCommon.importModeId="COPY" projectCommon.partId="mcu.arm.efm32.gg.efm32gg942f1024" projectCommon.sdkId="com.silabs.sdk.stack.super:2.6.3._-449673605"/>
+	<storageModule moduleId="com.silabs.ss.framework.ide.project.core.cpp" project.generation="9" projectCommon.boardIds="com.silabs.board.none:0.0.0" projectCommon.buildArtifactType="EXE" projectCommon.importModeId="COPY" projectCommon.partId="mcu.arm.efm32.gg.efm32gg942f1024" projectCommon.sdkId="com.silabs.sdk.stack.super:2.6.3._-449673605"/>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="Effect-Box-MCU.com.silabs.ss.framework.ide.project.core.cdt.cdtMbsProjectType.1368345414" name="SLS CDT Project" projectType="com.silabs.ss.framework.ide.project.core.cdt.cdtMbsProjectType"/>
 	</storageModule>
