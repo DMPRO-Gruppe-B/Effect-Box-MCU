@@ -140,25 +140,28 @@
 // $[SPIDISPLAY]
 #define HAL_SPIDISPLAY_ENABLE                         (1)
 
-#define BSP_SPIDISPLAY_EXTCOMIN_PIN                   (11U)
-#define BSP_SPIDISPLAY_EXTCOMIN_PORT                  (gpioPortE)
+#define BSP_SPIDISPLAY_EXTCOMIN_PIN                   (1U)
+#define BSP_SPIDISPLAY_EXTCOMIN_PORT                  (gpioPortD)
 
 #define BSP_SPIDISPLAY_DISPLAY                        (HAL_DISPLAY_SHARP_LS013B7DH03)
-#define BSP_SPIDISPLAY_USART                          (HAL_SPI_PORT_USART0)
+#define BSP_SPIDISPLAY_USART                          (HAL_SPI_PORT_USART1)
 #define HAL_SPIDISPLAY_EXTMODE_EXTCOMIN               (1)
 #define HAL_SPIDISPLAY_EXTMODE_SPI                    (0)
 #define HAL_SPIDISPLAY_EXTCOMIN_USE_CALLBACK          (0)
 #define HAL_SPIDISPLAY_EXTCOMIN_CALLBACK               
 #define HAL_SPIDISPLAY_EXTCOMIN_USE_PRS               (0)
-#define BSP_SPIDISPLAY_MOSI_PIN                       (10U)
-#define BSP_SPIDISPLAY_MOSI_PORT                      (gpioPortE)
-#define BSP_SPIDISPLAY_ROUTE_LOC                      (0U)
+#define BSP_SPIDISPLAY_MOSI_PIN                       (0U)
+#define BSP_SPIDISPLAY_MOSI_PORT                      (gpioPortD)
+#define BSP_SPIDISPLAY_ROUTE_LOC                      (1U)
 
-#define BSP_SPIDISPLAY_CLK_PIN                        (12U)
-#define BSP_SPIDISPLAY_CLK_PORT                       (gpioPortE)
+#define BSP_SPIDISPLAY_MISO_PIN                       (1U)
+#define BSP_SPIDISPLAY_MISO_PORT                      (gpioPortD)
 
-#define BSP_SPIDISPLAY_CS_PIN                         (13U)
-#define BSP_SPIDISPLAY_CS_PORT                        (gpioPortE)
+#define BSP_SPIDISPLAY_CLK_PIN                        (2U)
+#define BSP_SPIDISPLAY_CLK_PORT                       (gpioPortD)
+
+#define BSP_SPIDISPLAY_CS_PIN                         (3U)
+#define BSP_SPIDISPLAY_CS_PORT                        (gpioPortD)
 
 #define HAL_SPIDISPLAY_FREQUENCY                      (1000000UL)
 // [SPIDISPLAY]$
@@ -195,6 +198,9 @@
 #define PORTIO_USART0_CS_PIN                          (13U)
 #define PORTIO_USART0_CS_PORT                         (gpioPortE)
 
+#define PORTIO_USART0_RX_PIN                          (11U)
+#define PORTIO_USART0_RX_PORT                         (gpioPortE)
+
 #define PORTIO_USART0_TX_PIN                          (10U)
 #define PORTIO_USART0_TX_PORT                         (gpioPortE)
 
@@ -203,14 +209,27 @@
 #define BSP_USART0_MOSI_PIN                           (10U)
 #define BSP_USART0_MOSI_PORT                          (gpioPortE)
 #define BSP_USART0_ROUTE_LOC                          (0U)
+#define PINOUT_SPI_MOSI_PIN                           (10U)
+#define PINOUT_SPI_MOSI_PORT                          (gpioPortE)
+#define PINOUT_SPI_ROUTE_LOC                          (0U)
+
+#define BSP_USART0_MISO_PIN                           (11U)
+#define BSP_USART0_MISO_PORT                          (gpioPortE)
+#define PINOUT_SPI_MISO_PIN                           (11U)
+#define PINOUT_SPI_MISO_PORT                          (gpioPortE)
 
 #define BSP_USART0_CLK_PIN                            (12U)
 #define BSP_USART0_CLK_PORT                           (gpioPortE)
+#define PINOUT_SPI_CLK_PIN                            (12U)
+#define PINOUT_SPI_CLK_PORT                           (gpioPortE)
 
 #define BSP_USART0_CS_PIN                             (13U)
 #define BSP_USART0_CS_PORT                            (gpioPortE)
+#define PINOUT_SPI_CS_PIN                             (13U)
+#define PINOUT_SPI_CS_PORT                            (gpioPortE)
 
 #define HAL_USART0_FREQUENCY                          (1000000UL)
+#define PINOUT_SPI_FREQUENCY                          (1000000UL)
 // [USART0]$
 
 // $[USART1]
@@ -232,17 +251,27 @@
 #define BSP_USART1_MOSI_PIN                           (0U)
 #define BSP_USART1_MOSI_PORT                          (gpioPortD)
 #define BSP_USART1_ROUTE_LOC                          (1U)
+#define LCD_SPI_MOSI_PIN                              (0U)
+#define LCD_SPI_MOSI_PORT                             (gpioPortD)
+#define LCD_SPI_ROUTE_LOC                             (1U)
 
 #define BSP_USART1_MISO_PIN                           (1U)
 #define BSP_USART1_MISO_PORT                          (gpioPortD)
+#define LCD_SPI_MISO_PIN                              (1U)
+#define LCD_SPI_MISO_PORT                             (gpioPortD)
 
 #define BSP_USART1_CLK_PIN                            (2U)
 #define BSP_USART1_CLK_PORT                           (gpioPortD)
+#define LCD_SPI_CLK_PIN                               (2U)
+#define LCD_SPI_CLK_PORT                              (gpioPortD)
 
 #define BSP_USART1_CS_PIN                             (3U)
 #define BSP_USART1_CS_PORT                            (gpioPortD)
+#define LCD_SPI_CS_PIN                                (3U)
+#define LCD_SPI_CS_PORT                               (gpioPortD)
 
 #define HAL_USART1_FREQUENCY                          (1000000UL)
+#define LCD_SPI_FREQUENCY                             (1000000UL)
 // [USART1]$
 
 // $[USART2]
@@ -264,17 +293,27 @@
 #define BSP_USART2_MOSI_PIN                           (3U)
 #define BSP_USART2_MOSI_PORT                          (gpioPortB)
 #define BSP_USART2_ROUTE_LOC                          (1U)
+#define FPGA_SPI_MOSI_PIN                             (3U)
+#define FPGA_SPI_MOSI_PORT                            (gpioPortB)
+#define FPGA_SPI_ROUTE_LOC                            (1U)
 
 #define BSP_USART2_MISO_PIN                           (4U)
 #define BSP_USART2_MISO_PORT                          (gpioPortB)
+#define FPGA_SPI_MISO_PIN                             (4U)
+#define FPGA_SPI_MISO_PORT                            (gpioPortB)
 
 #define BSP_USART2_CLK_PIN                            (5U)
 #define BSP_USART2_CLK_PORT                           (gpioPortB)
+#define FPGA_SPI_CLK_PIN                              (5U)
+#define FPGA_SPI_CLK_PORT                             (gpioPortB)
 
 #define BSP_USART2_CS_PIN                             (6U)
 #define BSP_USART2_CS_PORT                            (gpioPortB)
+#define FPGA_SPI_CS_PIN                               (6U)
+#define FPGA_SPI_CS_PORT                              (gpioPortB)
 
 #define HAL_USART2_FREQUENCY                          (1000000UL)
+#define FPGA_SPI_FREQUENCY                            (1000000UL)
 // [USART2]$
 
 // $[USB]

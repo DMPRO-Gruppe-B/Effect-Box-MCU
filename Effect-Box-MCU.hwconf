@@ -19,6 +19,7 @@
     <property object="PF2" propertyId="ports.settings.reserve" value="Not allowed"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.clk" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.cs" value="Enabled"/>
+    <property object="PORTIO" propertyId="portio.usart0.enable.rx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart0.enable.tx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.clk" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart1.enable.cs" value="Enabled"/>
@@ -31,13 +32,16 @@
     <property object="PORTIO" propertyId="portio.usart2.enable.tx" value="Enabled"/>
     <property object="PORTIO" propertyId="portio.usart2.location.usart2" value="1"/>
     <property object="SPIDISPLAY" propertyId="ABPeripheral.included" value="true"/>
-    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_EXTCOMIN.PIN" value="PE11"/>
-    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_USART.MOD" value="USART0"/>
+    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_EXTCOMIN.PIN" value="PD1"/>
+    <property object="SPIDISPLAY" propertyId="SPIDISPLAY.BSP_SPIDISPLAY_USART.MOD" value="USART1"/>
     <property object="USART0" propertyId="ABPeripheral.included" value="true"/>
     <property object="USART0" propertyId="USART.BSP_USART_CLK.PIN" value="PE12"/>
     <property object="USART0" propertyId="USART.BSP_USART_CS.PIN" value="PE13"/>
+    <property object="USART0" propertyId="USART.BSP_USART_MISO.PIN" value="PE11"/>
     <property object="USART0" propertyId="USART.BSP_USART_MOSI.PIN" value="PE10"/>
+    <property object="USART0" propertyId="USART.BSP_USART_RX.PIN" value="PE11"/>
     <property object="USART0" propertyId="USART.BSP_USART_TX.PIN" value="PE10"/>
+    <property object="USART0" propertyId="USART.customname.STRING" value="PINOUT_SPI"/>
     <property object="USART0" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
     <property object="USART1" propertyId="ABPeripheral.included" value="true"/>
     <property object="USART1" propertyId="USART.BSP_USART_CLK.PIN" value="PD2"/>
@@ -46,6 +50,7 @@
     <property object="USART1" propertyId="USART.BSP_USART_MOSI.PIN" value="PD0"/>
     <property object="USART1" propertyId="USART.BSP_USART_RX.PIN" value="PD1"/>
     <property object="USART1" propertyId="USART.BSP_USART_TX.PIN" value="PD0"/>
+    <property object="USART1" propertyId="USART.customname.STRING" value="LCD_SPI"/>
     <property object="USART1" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
     <property object="USART2" propertyId="ABPeripheral.included" value="true"/>
     <property object="USART2" propertyId="USART.BSP_USART_CLK.PIN" value="PB5"/>
@@ -54,6 +59,7 @@
     <property object="USART2" propertyId="USART.BSP_USART_MOSI.PIN" value="PB3"/>
     <property object="USART2" propertyId="USART.BSP_USART_RX.PIN" value="PB4"/>
     <property object="USART2" propertyId="USART.BSP_USART_TX.PIN" value="PB3"/>
+    <property object="USART2" propertyId="USART.customname.STRING" value="FPGA_SPI"/>
     <property object="USART2" propertyId="USART.hal_usart_mode.ENUM" value="spi"/>
   </mode>
   <modeTransition>
