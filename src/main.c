@@ -1,5 +1,7 @@
 #include "em_device.h"
 #include "em_chip.h"
+#include "em_cmu.h"
+
 #include <stdio.h>
 
 #include "hal-config.h"
@@ -8,25 +10,28 @@
 #include "textdisplay.h"
 #include "retargettextdisplay.h"
 
-int main(void)
-{
-  /* Chip errata */
-  CHIP_Init();
+int main(void) {
+	/* Chip errata */
+	CHIP_Init();
 
-  DISPLAY_Init();
+	/* Infinite loop */
+	CMU_ClockEnable(cmuClock_GPIO, true);
 
-  /* Retarget stdio to a text display. */
-  if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
+	GPIO_PinModeSet(gpioPortC, 4, gpioModePushPull, 0);
+	GPIO_PinModeSet(gpioPortC, 5, gpioModePushPull, 0);
+
+	GPIO_PinOutSet(gpioPortC, 4);
+	GPIO_PinOutSet(gpioPortC, 5);
+
+	DISPLAY_Init();
+
+	/* Retarget stdio to a text display. */
+	if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
 	  while (1);
-  }
+	}
 
-  /* Output text on Memory LCD */
-  printf("\n");
-  printf(" Effect Box IV\n");
-  printf(" Gruppe B\n");
-  printf(" Signature Edition");
+	printf("Hello World!");
 
-  /* Infinite loop */
-  while (1) {
-  }
+	while (1) {
+	}
 }
