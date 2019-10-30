@@ -20,6 +20,8 @@
 
 #ifdef HAL_CONFIG
 #include "displayhalconfig.h"
+#include "displayconfigapp.h"
+
 #else
 /*
  * First, we list the default INCLUDE_XXX #defines which may be excluded later
