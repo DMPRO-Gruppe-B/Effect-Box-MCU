@@ -17,21 +17,31 @@ int main(void) {
 	/* Infinite loop */
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
+	/* Setup LEDs */
 	GPIO_PinModeSet(gpioPortC, 4, gpioModePushPull, 0);
 	GPIO_PinModeSet(gpioPortC, 5, gpioModePushPull, 0);
 
+	/* Turn on LEDs */
 	GPIO_PinOutSet(gpioPortC, 4);
 	GPIO_PinOutSet(gpioPortC, 5);
+
+	/* Setup buttons */
+	// Top button
+	GPIO_PinModeSet(gpioPortA, 0, gpioModeInput, 0);
 
 	DISPLAY_Init();
 
 	/* Retarget stdio to a text display. */
-	if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
-	  while (1);
-	}
-
-	printf("Hello World!");
-
+	//if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
+	//  while (1);
+	//}
+	//printf("Hello World!");
 	while (1) {
+		if (!GPIO_PinInGet(gpioPortA, 0)) {
+			while (!GPIO_PinInGet(gpioPortA, 0))
+				;
+
+			GPIO_PinOutToggle(gpioPortC, 4);
+		}
 	}
 }
