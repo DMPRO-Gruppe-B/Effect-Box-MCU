@@ -251,6 +251,8 @@
 #define BSP_USART1_MOSI_PIN                           (0U)
 #define BSP_USART1_MOSI_PORT                          (gpioPortD)
 #define BSP_USART1_ROUTE_LOC                          (1U)
+#define BSP_SPIDISPLAY_MOSI_LOC                       (1U)
+#define BSP_SPIDISPLAY_CLK_LOC                        (1U)
 #define LCD_SPI_MOSI_PIN                              (0U)
 #define LCD_SPI_MOSI_PORT                             (gpioPortD)
 #define LCD_SPI_ROUTE_LOC                             (1U)
@@ -324,6 +326,9 @@
 
 // $[WDOG]
 // [WDOG]$
+
+// Program hangs without this define
+#define POLARITY_INVERSION_EXTCOMIN_PAL_AUTO_TOGGLE
 
 #if defined(_SILICON_LABS_MODULE)
 #include "sl_module.h"

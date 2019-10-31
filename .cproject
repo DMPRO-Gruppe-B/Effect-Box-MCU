@@ -38,13 +38,13 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/external_copied_files_inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/external_copied_files}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/hal-config&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/platform/halconfig/inc/hal-config&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/hardware/kit/common/halconfig&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/hardware/kit/common/drivers&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/hardware/kit/common/bsp&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/platform/halconfig/inc/hal-config&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/platform/Device/SiliconLabs/EFM32GG/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/platform/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/platform/emlib/inc&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${StudioSdkPath}/hardware/kit/common/halconfig&quot;"/>
 								</option>
 								<option id="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols.1317136366" name="Defined symbols (-D)" superClass="com.silabs.ide.si32.gcc.cdt.managedbuild.tool.gnu.c.compiler.def.symbols" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="HAL_CONFIG=1"/>
