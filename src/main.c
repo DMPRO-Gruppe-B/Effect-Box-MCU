@@ -1,9 +1,7 @@
 #include "main.h"
+#include "systime.h"
 
-int main(void) {
-	/* Chip errata */
-	CHIP_Init();
-
+void GPIO_Init() {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
 	/* Setup LEDs */
@@ -17,12 +15,19 @@ int main(void) {
 	/* Setup buttons */
 	// Top button
 	GPIO_PinModeSet(gpioPortA, 0, gpioModeInput, 0);
+}
+
+int main(void) {
+	/* Chip errata */
+	CHIP_Init();
+
+	GPIO_Init();
 
 	/* Initialize HFXO with specific parameters */
 	CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
 	CMU_HFXOInit(&hfxoInit);
-	/* Enable and set HFXO for HFCLK */
 
+	/* Enable and set HFXO for HFCLK */
 	CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFXO);
 	CMU_OscillatorEnable(cmuOsc_HFRCO, false, false);
 

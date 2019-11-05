@@ -13,4 +13,6 @@
 #include "retargettextdisplay.h"
 #include "display.h"
 
+#define BIT(x) (1U << (x))
+
 #endif /* SRC_MAIN_H_ */
