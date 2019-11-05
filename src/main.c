@@ -1,21 +1,10 @@
-#include "em_device.h"
-#include "em_chip.h"
-#include "em_cmu.h"
-
-#include <stdio.h>
-
-#include "hal-config.h"
-
-#include "textdisplay.h"
-#include "retargettextdisplay.h"
-#include "display.h"
+#include "main.h"
 
 int main(void) {
 	/* Chip errata */
 	CHIP_Init();
 
 	CMU_ClockEnable(cmuClock_GPIO, true);
-	//CMU_ClockEnable(cmuClock_USART1, true);
 
 	/* Setup LEDs */
 	GPIO_PinModeSet(gpioPortC, 4, gpioModePushPull, 0);
@@ -35,8 +24,7 @@ int main(void) {
 	/* Enable and set HFXO for HFCLK */
 
 	CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFXO);
-    CMU_OscillatorEnable(cmuOsc_HFRCO, false, false);
-
+	CMU_OscillatorEnable(cmuOsc_HFRCO, false, false);
 
 	DISPLAY_Init();
 
@@ -50,7 +38,6 @@ int main(void) {
 	//if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
 	//  while (1);
 	//}
-
 	//printf("\n");
 	//printf("Hello World!");
 	/*
@@ -84,15 +71,6 @@ int main(void) {
 	GPIO_PinOutClear(gpioPortC, 5);
 
 	while (1) {
-		// Listen for button click
-		//if (!GPIO_PinInGet(gpioPortA, 0)) {
-		//	while (!GPIO_PinInGet(gpioPortA, 0))
-		//		;
-		//	// Toggle LED
-		//	GPIO_PinOutToggle(gpioPortC, 4);
-
-		//}
-
 		TEXTDISPLAY_WriteString(textHandle, "Hello world!");
 		//printf("Hello world!");
 	}

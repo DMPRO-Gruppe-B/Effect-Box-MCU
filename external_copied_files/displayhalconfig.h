@@ -3,6 +3,10 @@
 
 #include "hal-config.h"
 
+//DMPRO
+#define POLARITY_INVERSION_EXTCOMIN_PAL_AUTO_TOGGLE
+#define PAL_SPI_USART_LOCATION (USART_ROUTE_LOCATION_LOC1)
+
 // -----------------------------------------------------------------------------
 // Peripheral/pin configuration
 
