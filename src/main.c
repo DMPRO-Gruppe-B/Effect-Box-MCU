@@ -1,5 +1,6 @@
 #include "main.h"
 #include "systime.h"
+#include "effects.h"
 
 void GPIO_Init() {
 	CMU_ClockEnable(cmuClock_GPIO, true);
@@ -74,6 +75,7 @@ int main(void) {
 
 	// Clear LED to see that program did not fail
 	GPIO_PinOutClear(gpioPortC, 5);
+	setup_effects();
 
 	while (1) {
 		TEXTDISPLAY_WriteString(textHandle, "Hello world!");
