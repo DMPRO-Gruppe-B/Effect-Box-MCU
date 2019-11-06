@@ -117,8 +117,8 @@ EMSTATUS PAL_SpiInit(void)
                                      << _USART_ROUTELOC0_CLKLOC_SHIFT);
 
 // TODO aslettemark I sincerely hope this else clause isn't important
-//#else
-//  PAL_SPI_USART_UNIT->ROUTE = (USART_ROUTE_CLKPEN | USART_ROUTE_TXPEN | PAL_SPI_USART_LOCATION);
+#else
+  PAL_SPI_USART_UNIT->ROUTE = (USART_ROUTE_CLKPEN | USART_ROUTE_TXPEN | PAL_SPI_USART_LOCATION);
 #endif
 
   return status;

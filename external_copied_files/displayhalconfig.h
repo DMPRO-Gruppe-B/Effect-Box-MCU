@@ -3,6 +3,10 @@
 
 #include "hal-config.h"
 
+//DMPRO
+#define POLARITY_INVERSION_EXTCOMIN_PAL_AUTO_TOGGLE
+#define PAL_SPI_USART_LOCATION (USART_ROUTE_LOCATION_LOC1)
+
 // -----------------------------------------------------------------------------
 // Peripheral/pin configuration
 
@@ -40,16 +44,16 @@
   #error "Display config: Unknown USART selection"
 #endif
 
-#define LCD_PORT_SI                   BSP_SPIDISPLAY_MOSI_PORT
-#define LCD_PIN_SI                    BSP_SPIDISPLAY_MOSI_PIN
-#define PAL_SPI_USART_LOCATION_TX     BSP_SPIDISPLAY_MOSI_LOC
-#define LCD_PORT_SCLK                 BSP_SPIDISPLAY_CLK_PORT
-#define LCD_PIN_SCLK                  BSP_SPIDISPLAY_CLK_PIN
-#define PAL_SPI_USART_LOCATION_SCLK   BSP_SPIDISPLAY_CLK_LOC
-#define LCD_PORT_SCS                  BSP_SPIDISPLAY_CS_PORT
-#define LCD_PIN_SCS                   BSP_SPIDISPLAY_CS_PIN
+#define LCD_PORT_SI                   LCD_SPI_MOSI_PORT
+#define LCD_PIN_SI                    LCD_SPI_MOSI_PIN
+#define PAL_SPI_USART_LOCATION_TX     LCD_SPI_ROUTE_LOC
+#define LCD_PORT_SCLK                 LCD_SPI_CLK_PORT
+#define LCD_PIN_SCLK                  LCD_SPI_CLK_PIN
+#define PAL_SPI_USART_LOCATION_SCLK   LCD_SPI_ROUTE_LOC
+#define LCD_PORT_SCS                  LCD_SPI_CS_PORT
+#define LCD_PIN_SCS                   LCD_SPI_CS_PIN
 
-#define PAL_SPI_BAUDRATE              HAL_SPIDISPLAY_FREQUENCY
+#define PAL_SPI_BAUDRATE              LCD_SPI_FREQUENCY
 
 #if defined(BSP_SPIDISPLAY_ENABLE_PORT)
 // Use power/enable pin
