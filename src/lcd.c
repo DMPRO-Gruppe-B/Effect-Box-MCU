@@ -7,6 +7,8 @@ const char *units[] = { MILLISECONDS, PERCENTAGE, BITS };
 int values[] = { 0, 0, 0 };
 const int inc[] = { 10, 10, 1 };
 
+int currentEffect = 0;
+
 unsigned int cursor = 0;
 
 uint8_t countEffectsAndSettings() {
@@ -33,43 +35,53 @@ void LCD_InitialRender() {
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
 }
 
+// TODO: Handle case for choosing settings
 void LCD_NavigateUp() {
-	printf(" \n");
+	uint8_t effectsAndSettings = countEffectsAndSettings();
+	printf(NO_CURSOR);
 	if (cursor) {
-		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		cursor--;
+		uint8_t stride = effects[currentEffect - 1].n_settings + 1;
+		for (uint8_t i = 0; i <= stride; i++) {
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		}
+		cursor -= stride;
+		currentEffect -= 1;
 	} else {
-		cursor = EFFECTS - 1;
-		for (unsigned int i = 1; i < EFFECTS - 1; i++) {
+		uint8_t lastEffectIndex = effectsAndSettings - effects[EFFECTS - 1].n_settings - 1;
+		cursor = lastEffectIndex;
+		for (unsigned int i = 1; i < lastEffectIndex; i++) {
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
 		}
+		currentEffect = EFFECTS - 1;
 	}
 	printf(">\n");
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 	GPIO_PinOutToggle(gpioPortF, 5);
 }
 
+// TODO: Handle case for choosing settings
 void LCD_NavigateDown() {
-	printf(NO_CURSOR);
 	uint8_t effectsAndSettings = countEffectsAndSettings();
+	printf(NO_CURSOR);
 	// Handles case if last effect selected
 	if (cursor == effectsAndSettings - effects[EFFECTS - 1].n_settings - 1) {
 		cursor = 0;
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
+		currentEffect = 0;
 	}
 	// Handles case for last setting in last effect (should wrap to first setting in last effect)
-	else if (cursor >= countEffectsAndSettings()) {
-		for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
-			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		}
-		cursor -= effects[cursor].n_settings - 1;
-	}
+	//else if (cursor >= countEffectsAndSettings()) {
+	//	for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
+	//		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+	//	}
+	//	cursor -= effects[cursor].n_settings - 1;
+	//}
 	else {
 		for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
 		}
 		cursor += effects[cursor].n_settings + 1;
+		currentEffect += 1;
 	}
 	printf(CURSOR);
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
