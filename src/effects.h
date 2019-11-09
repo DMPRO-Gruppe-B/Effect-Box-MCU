@@ -3,6 +3,8 @@
 
 #include "main.h"
 
+#define EFFECTS 2
+
 extern effect_t effects[2];
 
 setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value,

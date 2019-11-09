@@ -9,17 +9,12 @@
 #define TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE                               \
   "\033B" /**< Move cursor down one line. */
 
-#define EFFECTS 3
-
-#define CURSOR_LINE ">%-12.12s%3d%5s\n"
-#define LINE " %-12.12s%3d%5s\n"
+#define INLINE_CURSOR_LINE " >%-11.11s%3d%5s\n"
+#define CURSOR_LINE ">%s\n"
+#define LINE " %s\n"
+#define INLINE_LINE "  %-11.11s%3d%5s\n"
 #define CURSOR ">\n"
 #define NO_CURSOR " \n"
-
-// Effects
-#define DELAY "delay"
-#define COMPRESSOR "compressor"
-#define BITCRUSHER "bitcrusher"
 
 // Units
 #define PERCENTAGE "%"
