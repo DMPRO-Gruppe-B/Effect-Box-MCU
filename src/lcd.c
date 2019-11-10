@@ -183,23 +183,25 @@ void LCD_NavigateOut() {
 }
 
 void LCD_IncrementValue() {
-	if (values[cursor] == inc[cursor] * 10) {
-		values[cursor] = 0;
+	setting_t *setting = effects[currentEffect].settings[currentSetting];
+	if (setting->value == setting->max) {
+		setting->value = setting->min;
 	} else {
-		values[cursor] += inc[cursor];
+		setting->value += setting->step_size;
 	}
-	printf(CURSOR_LINE, effects[cursor].name);
+	printf(INLINE_CURSOR_LINE, setting->name, setting->value, setting->unit);
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 	GPIO_PinOutToggle(gpioPortC, 5);
 }
 
 void LCD_DecrementValue() {
-	if (values[cursor] == 0) {
-		values[cursor] = inc[cursor] * 10;
+	setting_t *setting = effects[currentEffect].settings[currentSetting];
+	if (setting->value == setting->min) {
+		setting->value = setting->max;
 	} else {
-		values[cursor] -= inc[cursor];
+		setting->value -= setting->step_size;
 	}
-	printf(CURSOR_LINE, effects[cursor].name);
+	printf(INLINE_CURSOR_LINE, setting->name, setting->value, setting->unit);
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 	GPIO_PinOutToggle(gpioPortC, 5);
 }
