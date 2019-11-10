@@ -8,6 +8,8 @@ int values[] = { 0, 0, 0 };
 const int inc[] = { 10, 10, 1 };
 
 int currentEffect = 0;
+int currentSetting = -1;
+int isInline = false;
 
 unsigned int cursor = 0;
 
@@ -17,6 +19,25 @@ uint8_t countEffectsAndSettings() {
 		count += effects[i].n_settings;
 	}
 	return count + (uint8_t) EFFECTS;
+}
+
+int *getEffectIndices() {
+	int *indices = malloc(EFFECTS * sizeof(int));
+	int index = 0;
+	for (int i = 0; i < EFFECTS; i++) {
+		indices[i] = index;
+		index += effects[i].n_settings + 1;
+	}
+	return indices;
+}
+
+bool isEffectIndex() {
+	int *effectIndices = getEffectIndices();
+	for (int i = 0; i < EFFECTS; i++) {
+		if (effectIndices[i] == cursor)
+			return true;
+	}
+	return false;
 }
 
 void LCD_InitialRender() {
@@ -35,57 +56,130 @@ void LCD_InitialRender() {
 	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
 }
 
-// TODO: Handle case for choosing settings
 void LCD_NavigateUp() {
-	uint8_t effectsAndSettings = countEffectsAndSettings();
-	printf(NO_CURSOR);
-	if (cursor) {
-		uint8_t stride = effects[currentEffect - 1].n_settings + 1;
-		for (uint8_t i = 0; i <= stride; i++) {
-			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+	if (!isInline) {
+		uint8_t effectsAndSettings = countEffectsAndSettings();
+		printf(NO_CURSOR);
+		if (cursor) {
+			uint8_t stride = effects[currentEffect - 1].n_settings + 1;
+			for (uint8_t i = 0; i <= stride; i++) {
+				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			}
+			cursor -= stride;
+			currentEffect -= 1;
+		} else {
+			uint8_t lastEffectIndex = effectsAndSettings
+					- effects[EFFECTS - 1].n_settings - 1;
+			cursor = lastEffectIndex;
+			for (unsigned int i = 1; i < lastEffectIndex; i++) {
+				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
+			}
+			currentEffect = EFFECTS - 1;
 		}
-		cursor -= stride;
-		currentEffect -= 1;
-	} else {
-		uint8_t lastEffectIndex = effectsAndSettings - effects[EFFECTS - 1].n_settings - 1;
-		cursor = lastEffectIndex;
-		for (unsigned int i = 1; i < lastEffectIndex; i++) {
-			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
-		}
-		currentEffect = EFFECTS - 1;
+		printf(">\n");
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		GPIO_PinOutToggle(gpioPortF, 5);
 	}
-	printf(">\n");
-	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-	GPIO_PinOutToggle(gpioPortF, 5);
+	// If cursor is inline
+	else {
+		// Navigate up should select previous setting if one exist
+		// Check if current setting is not first setting
+		if (currentSetting) {
+			printf(NO_INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			printf(INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			cursor--;
+			currentSetting--;
+		}
+		// Current setting is first setting: Should wrap around to last setting
+		else {
+			printf(NO_INLINE_CURSOR);
+			cursor++;
+			uint8_t n_settings = effects[currentEffect].n_settings;
+			for (int i = 0; i < n_settings - 2; i++) {
+				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
+				cursor++;
+			}
+			printf(INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			currentSetting = n_settings - 1;
+		}
+
+	}
 }
 
-// TODO: Handle case for choosing settings
 void LCD_NavigateDown() {
-	uint8_t effectsAndSettings = countEffectsAndSettings();
-	printf(NO_CURSOR);
-	// Handles case if last effect selected
-	if (cursor == effectsAndSettings - effects[EFFECTS - 1].n_settings - 1) {
-		cursor = 0;
-		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
-		currentEffect = 0;
-	}
-	// Handles case for last setting in last effect (should wrap to first setting in last effect)
-	//else if (cursor >= countEffectsAndSettings()) {
-	//	for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
-	//		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-	//	}
-	//	cursor -= effects[cursor].n_settings - 1;
-	//}
-	else {
-		for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
-			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
+	if (!isInline) {
+		uint8_t effectsAndSettings = countEffectsAndSettings();
+		printf(NO_CURSOR);
+		// Handles case if last effect selected
+		if (cursor
+				== effectsAndSettings - effects[EFFECTS - 1].n_settings - 1) {
+			cursor = 0;
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
+			currentEffect = 0;
+		} else {
+			for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
+				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
+			}
+			cursor += effects[cursor].n_settings + 1;
+			currentEffect++;
 		}
-		cursor += effects[cursor].n_settings + 1;
-		currentEffect += 1;
+		printf(CURSOR);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		GPIO_PinOutToggle(gpioPortC, 4);
+	} else {
+		uint8_t n_settings = effects[currentEffect].n_settings;
+		// Current setting is last setting: Should wrap around to first setting
+		if (currentSetting == n_settings - 1) {
+			printf(NO_INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			for (int i = 0; i < n_settings - 1; i++) {
+				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+				cursor++;
+			}
+			printf(INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			currentSetting = 0;
+		}
+		// If current setting is not last setting
+		else {
+			printf(NO_INLINE_CURSOR);
+			printf(INLINE_CURSOR);
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			cursor++;
+			currentSetting++;
+		}
 	}
-	printf(CURSOR);
-	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-	GPIO_PinOutToggle(gpioPortC, 4);
+}
+
+void LCD_NavigateIn() {
+// Should only be able to navigate in if effect is selected
+	if (isEffectIndex()) {
+		printf(NO_CURSOR);
+		printf(INLINE_CURSOR);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		cursor++;
+		isInline = true;
+		currentSetting = 0;
+	}
+}
+
+void LCD_NavigateOut() {
+	if (!isEffectIndex()) {
+		printf(NO_INLINE_CURSOR);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		for (uint8_t i = 0; i < currentSetting + 1; i++) {
+			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+			cursor--;
+		}
+		currentSetting = -1;
+		isInline = false;
+		printf(CURSOR);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+	}
 }
 
 void LCD_IncrementValue() {

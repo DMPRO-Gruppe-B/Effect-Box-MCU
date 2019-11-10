@@ -14,7 +14,9 @@
 #define LINE " %s\n"
 #define INLINE_LINE "  %-11.11s%3d%5s\n"
 #define CURSOR ">\n"
+#define INLINE_CURSOR " >\n"
 #define NO_CURSOR " \n"
+#define NO_INLINE_CURSOR "  \n"
 
 // Units
 #define PERCENTAGE "%"
@@ -24,7 +26,11 @@
 void LCD_InitialRender();
 void LCD_NavigateUp();
 void LCD_NavigateDown();
+void LCD_NavigateIn();
+void LCD_NavigateOut();
 void LCD_IncrementValue();
 void LCD_DecrementValue();
+int *getEffectIndices();
+
 
 #endif /* SRC_LCD_H_ */

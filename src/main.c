@@ -69,11 +69,25 @@ int main(void) {
 			LCD_NavigateUp();
 		}
 
-		// Buttom navigation button
+		// Bottom navigation button
 		if (!GPIO_PinInGet(gpioPortA, 2)) {
 			while (!GPIO_PinInGet(gpioPortA, 2))
 				;
 			LCD_NavigateDown();
+		}
+
+		// Right navigation button
+		if (!GPIO_PinInGet(gpioPortA, 1)) {
+			while (!GPIO_PinInGet(gpioPortA, 1))
+				;
+			LCD_NavigateIn();
+		}
+
+		// Left navigation button
+		if (!GPIO_PinInGet(gpioPortA, 3)) {
+			while (!GPIO_PinInGet(gpioPortA, 3))
+				;
+			LCD_NavigateOut();
 		}
 
 		// Left decrement button
