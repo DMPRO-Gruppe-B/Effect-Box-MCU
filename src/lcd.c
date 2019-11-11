@@ -68,8 +68,7 @@ void LCD_NavigateUp() {
 			cursor -= stride;
 			currentEffect -= 1;
 		} else {
-			uint8_t lastEffectIndex = effectsAndSettings
-					- effects[EFFECTS - 1].n_settings - 1;
+			uint8_t lastEffectIndex = effectsAndSettings - effects[EFFECTS - 1].n_settings - 1;
 			cursor = lastEffectIndex;
 			for (unsigned int i = 1; i < lastEffectIndex; i++) {
 				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
@@ -115,8 +114,7 @@ void LCD_NavigateDown() {
 		uint8_t effectsAndSettings = countEffectsAndSettings();
 		printf(NO_CURSOR);
 		// Handles case if last effect selected
-		if (cursor
-				== effectsAndSettings - effects[EFFECTS - 1].n_settings - 1) {
+		if (cursor == effectsAndSettings - effects[EFFECTS - 1].n_settings - 1) {
 			cursor = 0;
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
 			currentEffect = 0;
