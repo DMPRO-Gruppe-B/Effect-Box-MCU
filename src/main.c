@@ -1,6 +1,7 @@
 #include "main.h"
-#include "systime.h"
 #include "effects.h"
+#include "systime.h"
+#include "lcd.h"
 
 void GPIO_Init() {
 	CMU_ClockEnable(cmuClock_GPIO, true);
@@ -14,8 +15,9 @@ void GPIO_Init() {
 	GPIO_PinOutSet(gpioPortC, 5);
 
 	/* Setup buttons */
-	// Top button
-	GPIO_PinModeSet(gpioPortA, 0, gpioModeInput, 0);
+	for (int i = 0; i < 6; i++) {
+		GPIO_PinModeSet(gpioPortA, i, gpioModeInput, 0);
+	}
 }
 
 int main(void) {
@@ -34,31 +36,59 @@ int main(void) {
 
 	DISPLAY_Init();
 
-	/*
-	 * Version 1
-	 * Retargeting stdio to LCD
-	 *
-	 * */
-
 	/* Retarget stdio to a text display. */
 	if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
 		while (1)
 			;
 	}
-	printf("\n");
-	printf("Hello World!");
-	/*
-	 * Version 2
-	 * Text display driver's native text output function
-	 *
-	 * */
 
 	// Clear LED to see that program did not fail
 	GPIO_PinOutClear(gpioPortC, 5);
 	setup_effects();
 
+	LCD_InitialRender();
+
 	while (1) {
-		// TEXTDISPLAY_WriteString(textHandle, "Hello world!");
-		printf("Hello world!");
+		// Top navigation button
+		if (!GPIO_PinInGet(gpioPortA, 0)) {
+			while (!GPIO_PinInGet(gpioPortA, 0))
+				;
+			LCD_NavigateUp();
+		}
+
+		// Bottom navigation button
+		if (!GPIO_PinInGet(gpioPortA, 2)) {
+			while (!GPIO_PinInGet(gpioPortA, 2))
+				;
+			LCD_NavigateDown();
+		}
+
+		// Right navigation button
+		if (!GPIO_PinInGet(gpioPortA, 1)) {
+			while (!GPIO_PinInGet(gpioPortA, 1))
+				;
+			LCD_NavigateIn();
+		}
+
+		// Left navigation button
+		if (!GPIO_PinInGet(gpioPortA, 3)) {
+			while (!GPIO_PinInGet(gpioPortA, 3))
+				;
+			LCD_NavigateOut();
+		}
+
+		// Left decrement button
+		if (!GPIO_PinInGet(gpioPortA, 5)) {
+			while (!GPIO_PinInGet(gpioPortA, 5))
+				;
+			LCD_DecrementValue();
+		}
+
+		// Right increment button
+		if (!GPIO_PinInGet(gpioPortA, 4)) {
+			while (!GPIO_PinInGet(gpioPortA, 4))
+				;
+			LCD_IncrementValue();
+		}
 	}
 }

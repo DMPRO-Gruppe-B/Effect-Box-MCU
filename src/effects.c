@@ -1,6 +1,7 @@
 #include "effects.h"
 
-effect_t effects[2];
+effect_t effects[EFFECTS];
+uint8_t n_settings = 0;
 
 setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value, uint16_t step_size, uint16_t min,
 		uint16_t max) {
@@ -17,6 +18,7 @@ setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value, ui
 	strcpy(setting->name, name);
 	strcpy(setting->unit, unit);
 
+	n_settings++;
 	return setting;
 }
 
@@ -34,7 +36,7 @@ void setup_effects() {
 	effect_t bitcrusher = create_effect("Bitcrusher", 3);
 	bitcrusher.settings[0] = create_setting(0b00000000, "Enable", "", 0, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(0b00000001, "Bits", "bits", 0, 1, 0, 8);
-	bitcrusher.settings[2] = create_setting(0b00000010, "Sample interval", "", 1, 1, 1, 16);
+	bitcrusher.settings[2] = create_setting(0b00000010, "Sample int", "", 1, 1, 1, 16);
 
 	effect_t delay = create_effect("Delay", 2);
 	delay.settings[0] = create_setting(0b00000100, "Enable", "", 0, 1, 0, 1);
