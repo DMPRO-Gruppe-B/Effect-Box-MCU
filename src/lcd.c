@@ -1,6 +1,4 @@
 #include "lcd.h"
-#include "main.h"
-#include "effects.h"
 
 //char *lcd_effects[] = { DELAY, COMPRESSOR, BITCRUSHER };
 const char *units[] = { MILLISECONDS, PERCENTAGE, BITS };
@@ -14,11 +12,7 @@ int isInline = false;
 unsigned int cursor = 0;
 
 uint8_t countEffectsAndSettings() {
-	uint8_t count = 0;
-	for (int i = 0; i < EFFECTS; i++) {
-		count += effects[i].n_settings;
-	}
-	return count + (uint8_t) EFFECTS;
+	return n_settings + EFFECTS;
 }
 
 int *getEffectIndices() {

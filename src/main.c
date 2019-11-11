@@ -36,14 +36,6 @@ int main(void) {
 
 	DISPLAY_Init();
 
-	bool initialRender = true;
-
-	/*
-	 * Version 1
-	 * Retargeting stdio to LCD
-	 *
-	 * */
-
 	/* Retarget stdio to a text display. */
 	if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
 		while (1)
@@ -54,14 +46,9 @@ int main(void) {
 	GPIO_PinOutClear(gpioPortC, 5);
 	setup_effects();
 
+	LCD_InitialRender();
+
 	while (1) {
-
-		// Print list of effects with their respective initial values
-		if (initialRender) {
-			LCD_InitialRender();
-			initialRender = false;
-		}
-
 		// Top navigation button
 		if (!GPIO_PinInGet(gpioPortA, 0)) {
 			while (!GPIO_PinInGet(gpioPortA, 0))
@@ -103,6 +90,5 @@ int main(void) {
 				;
 			LCD_IncrementValue();
 		}
-
 	}
 }

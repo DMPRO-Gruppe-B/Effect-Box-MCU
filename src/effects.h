@@ -5,7 +5,8 @@
 
 #define EFFECTS 2
 
-extern effect_t effects[2];
+extern effect_t effects[EFFECTS];
+extern uint8_t n_settings;
 
 setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value,
 		uint16_t step_size, uint16_t min, uint16_t max);

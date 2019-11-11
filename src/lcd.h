@@ -1,6 +1,9 @@
 #ifndef SRC_LCD_H_
 #define SRC_LCD_H_
 
+#include "main.h"
+#include "effects.h"
+
 // TODO: Remove these and include them properly in textdisplay.h
 #define TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100                                  \
   "\033[H" /**< Move cursor to upper left corner. */
