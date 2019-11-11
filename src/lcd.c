@@ -10,23 +10,22 @@ int currentSetting = -1;
 int isInline = false;
 
 unsigned int cursor = 0;
+int *effectIndices = NULL;
 
 uint8_t countEffectsAndSettings() {
 	return n_settings + EFFECTS;
 }
 
-int *getEffectIndices() {
-	int *indices = malloc(EFFECTS * sizeof(int));
+void calculateEffectIndices() {
+	effectIndices = malloc(EFFECTS * sizeof(int));
 	int index = 0;
 	for (int i = 0; i < EFFECTS; i++) {
-		indices[i] = index;
+		effectIndices[i] = index;
 		index += effects[i].n_settings + 1;
 	}
-	return indices;
 }
 
 bool isEffectIndex() {
-	int *effectIndices = getEffectIndices();
 	for (int i = 0; i < EFFECTS; i++) {
 		if (effectIndices[i] == cursor)
 			return true;
@@ -35,6 +34,8 @@ bool isEffectIndex() {
 }
 
 void LCD_InitialRender() {
+	calculateEffectIndices();
+
 	printf(CURSOR_LINE, effects[0].name);
 	for (uint8_t i = 0; i < effects[0].n_settings; i++) {
 		setting_t *setting = effects[0].settings[i];
