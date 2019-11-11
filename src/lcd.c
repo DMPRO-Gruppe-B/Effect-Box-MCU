@@ -1,23 +1,17 @@
 #include "lcd.h"
 
-//char *lcd_effects[] = { DELAY, COMPRESSOR, BITCRUSHER };
-const char *units[] = { MILLISECONDS, PERCENTAGE, BITS };
-int values[] = { 0, 0, 0 };
-const int inc[] = { 10, 10, 1 };
-
 int currentEffect = 0;
 int currentSetting = -1;
 int isInline = false;
 
 unsigned int cursor = 0;
-int *effectIndices = NULL;
+int effectIndices[EFFECTS];
 
 uint8_t countEffectsAndSettings() {
 	return n_settings + EFFECTS;
 }
 
 void calculateEffectIndices() {
-	effectIndices = malloc(EFFECTS * sizeof(int));
 	int index = 0;
 	for (int i = 0; i < EFFECTS; i++) {
 		effectIndices[i] = index;
