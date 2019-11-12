@@ -68,7 +68,6 @@ int main(void) {
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	while (1) {
-		// Top navigation button
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
 		if (!input || msTicks - lastClick < 30)
 			continue;
