@@ -170,25 +170,31 @@ void LCD_NavigateOut() {
 }
 
 void LCD_IncrementValue() {
-	setting_t *setting = effects[currentEffect].settings[currentSetting];
-	if (setting->value == setting->max) {
-		setting->value = setting->min;
-	} else {
-		setting->value += setting->step_size;
+	if (!isEffectIndex()) {
+		setting_t *setting = effects[currentEffect].settings[currentSetting];
+		if (setting->value == setting->max) {
+			setting->value = setting->min;
+		} else {
+			setting->value += setting->step_size;
+		}
+		printf(INLINE_CURSOR_LINE, setting->name, setting->value,
+				setting->unit);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		GPIO_PinOutToggle(gpioPortC, 5);
 	}
-	printf(INLINE_CURSOR_LINE, setting->name, setting->value, setting->unit);
-	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-	GPIO_PinOutToggle(gpioPortC, 5);
 }
 
 void LCD_DecrementValue() {
-	setting_t *setting = effects[currentEffect].settings[currentSetting];
-	if (setting->value == setting->min) {
-		setting->value = setting->max;
-	} else {
-		setting->value -= setting->step_size;
+	if (!isEffectIndex()) {
+		setting_t *setting = effects[currentEffect].settings[currentSetting];
+		if (setting->value == setting->min) {
+			setting->value = setting->max;
+		} else {
+			setting->value -= setting->step_size;
+		}
+		printf(INLINE_CURSOR_LINE, setting->name, setting->value,
+				setting->unit);
+		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		GPIO_PinOutToggle(gpioPortC, 5);
 	}
-	printf(INLINE_CURSOR_LINE, setting->name, setting->value, setting->unit);
-	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-	GPIO_PinOutToggle(gpioPortC, 5);
 }
