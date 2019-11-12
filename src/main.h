@@ -15,6 +15,21 @@
 #include "retargettextdisplay.h"
 #include "display.h"
 
+#define BUTTON_PORT               (gpioPortA)
+#define BUTTON_NAVIGATION_UP      (0)
+#define BUTTON_NAVIGATION_DOWN    (2)
+#define BUTTON_NAVIGATION_LEFT    (1)
+#define BUTTON_NAVIGATION_RIGHT   (3)
+#define BUTTON_INCREMENT          (4)
+#define BUTTON_DECREMENT          (5)
+
+#define LED_PORT                  (gpioPortC)
+#define LED_LEFT                  (5)
+#define LED_RIGHT                 (6)
+
+#define button_pressed(portInput, button) ((1 << button) & input)
+
+
 #define BIT(x) (1U << (x))
 
 typedef unsigned char byte;

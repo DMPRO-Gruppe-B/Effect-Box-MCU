@@ -1,24 +1,42 @@
 #include "main.h"
+
+#include <core_cm3.h>
+#include <em_gpio.h>
+#include <stdbool.h>
+#include <sys/_stdint.h>
+
 #include "effects.h"
-#include "systime.h"
 #include "lcd.h"
+#include "systime.h"
 
 void GPIO_Init() {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
 	/* Setup LEDs */
-	GPIO_PinModeSet(gpioPortC, 4, gpioModePushPull, 0);
-	GPIO_PinModeSet(gpioPortC, 5, gpioModePushPull, 0);
+	GPIO_PinModeSet(LED_PORT, LED_LEFT, gpioModePushPull, 0);
+	GPIO_PinModeSet(LED_PORT, LED_RIGHT, gpioModePushPull, 0);
 
 	/* Turn on LEDs */
-	GPIO_PinOutSet(gpioPortC, 4);
-	GPIO_PinOutSet(gpioPortC, 5);
+	GPIO_PinOutSet(LED_PORT, LED_LEFT);
+	GPIO_PinOutSet(LED_PORT, LED_RIGHT);
 
 	/* Setup buttons */
-	for (int i = 0; i < 6; i++) {
-		GPIO_PinModeSet(gpioPortA, i, gpioModeInput, 0);
-	}
+
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_NAVIGATION_UP, gpioModeInput, 0);
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_NAVIGATION_DOWN, gpioModeInput, 0);
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_NAVIGATION_LEFT, gpioModeInput, 0);
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_NAVIGATION_RIGHT, gpioModeInput, 0);
+
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_INCREMENT, gpioModeInput, 0);
+	GPIO_PinModeSet(BUTTON_PORT, BUTTON_DECREMENT, gpioModeInput, 0);
+
 }
+
+/* Counts 1ms timeTicks */
+volatile uint32_t lastButton = 0;
+volatile uint32_t lastClick = 0;
+
+volatile uint8_t LED_state = 0;
 
 int main(void) {
 	/* Chip errata */
@@ -47,48 +65,29 @@ int main(void) {
 	setup_effects();
 
 	LCD_InitialRender();
+	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	while (1) {
 		// Top navigation button
-		if (!GPIO_PinInGet(gpioPortA, 0)) {
-			while (!GPIO_PinInGet(gpioPortA, 0))
-				;
+		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
+		if (!input || msTicks - lastClick < 30)
+			continue;
+
+		if (button_pressed(input, BUTTON_NAVIGATION_UP)) {
 			LCD_NavigateUp();
-		}
-
-		// Bottom navigation button
-		if (!GPIO_PinInGet(gpioPortA, 2)) {
-			while (!GPIO_PinInGet(gpioPortA, 2))
-				;
+		} else if (button_pressed(input, BUTTON_NAVIGATION_DOWN)) {
 			LCD_NavigateDown();
-		}
-
-		// Right navigation button
-		if (!GPIO_PinInGet(gpioPortA, 1)) {
-			while (!GPIO_PinInGet(gpioPortA, 1))
-				;
+		} else if (button_pressed(input, BUTTON_NAVIGATION_LEFT)) {
 			LCD_NavigateIn();
-		}
-
-		// Left navigation button
-		if (!GPIO_PinInGet(gpioPortA, 3)) {
-			while (!GPIO_PinInGet(gpioPortA, 3))
-				;
+		} else if (button_pressed(input, BUTTON_NAVIGATION_RIGHT)) {
 			LCD_NavigateOut();
-		}
-
-		// Left decrement button
-		if (!GPIO_PinInGet(gpioPortA, 5)) {
-			while (!GPIO_PinInGet(gpioPortA, 5))
-				;
+		} else if (button_pressed(input, BUTTON_INCREMENT)) {
+			LCD_IncrementValue();
+		} else if (button_pressed(input, BUTTON_DECREMENT)) {
 			LCD_DecrementValue();
 		}
-
-		// Right increment button
-		if (!GPIO_PinInGet(gpioPortA, 4)) {
-			while (!GPIO_PinInGet(gpioPortA, 4))
-				;
-			LCD_IncrementValue();
-		}
+		while (((~GPIO_PortInGet(BUTTON_PORT)) & 0b111111) == input)
+			;
+		lastClick = msTicks;
 	}
 }
