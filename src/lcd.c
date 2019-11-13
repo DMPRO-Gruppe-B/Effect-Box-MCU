@@ -180,6 +180,7 @@ void LCD_IncrementValue() {
 		printf(INLINE_CURSOR_LINE, setting->name, setting->value,
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		send_setting(setting);
 		GPIO_PinOutToggle(LED_PORT, LED_RIGHT);
 	}
 }
@@ -195,6 +196,7 @@ void LCD_DecrementValue() {
 		printf(INLINE_CURSOR_LINE, setting->name, setting->value,
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
+		send_setting(setting);
 		GPIO_PinOutToggle(LED_PORT, LED_RIGHT);
 	}
 }

@@ -27,6 +27,8 @@
 #define LED_LEFT                  (5)
 #define LED_RIGHT                 (6)
 
+#define FPGA_SPI_PORT             (FPGA_SPI_CS_PORT)
+
 #define button_pressed(portInput, button) ((1 << button) & input)
 
 
