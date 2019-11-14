@@ -9,6 +9,9 @@
 #include "lcd.h"
 #include "systime.h"
 
+/* Counts 1ms timeTicks */
+volatile uint32_t lastClick = 0;
+
 void GPIO_Init() {
 	CMU_ClockEnable(cmuClock_GPIO, true);
 
@@ -34,13 +37,15 @@ void GPIO_Init() {
 	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_MISO_PIN, gpioModeInput, 0);
 	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_CLK_PIN, gpioModePushPull, 0);
 	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_CS_PIN, gpioModePushPull, 0);
+
+	GPIO_PinModeSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN, gpioModePushPull, 0);
 }
 
-/* Counts 1ms timeTicks */
-volatile uint32_t lastButton = 0;
-volatile uint32_t lastClick = 0;
-
-volatile uint8_t LED_state = 0;
+void reset_fpga() {
+	GPIO_PinOutSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
+	Delay(50);
+	GPIO_PinOutClear(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
+}
 
 int main(void) {
 	/* Chip errata */
@@ -65,11 +70,13 @@ int main(void) {
 	}
 
 	// Clear LED to see that program did not fail
-	GPIO_PinOutClear(gpioPortC, 5);
+	GPIO_PinOutClear(LED_PORT, LED_LEFT);
 	setup_effects();
 
 	LCD_InitialRender();
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
+
+	reset_fpga();
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
