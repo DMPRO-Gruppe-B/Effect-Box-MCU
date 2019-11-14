@@ -30,6 +30,10 @@ void GPIO_Init() {
 	GPIO_PinModeSet(BUTTON_PORT, BUTTON_INCREMENT, gpioModeInput, 0);
 	GPIO_PinModeSet(BUTTON_PORT, BUTTON_DECREMENT, gpioModeInput, 0);
 
+	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_MOSI_PIN, gpioModePushPull, 0);
+	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_MISO_PIN, gpioModeInput, 0);
+	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_CLK_PIN, gpioModePushPull, 0);
+	GPIO_PinModeSet(FPGA_SPI_PORT, FPGA_SPI_CS_PIN, gpioModePushPull, 0);
 }
 
 /* Counts 1ms timeTicks */
@@ -69,7 +73,7 @@ int main(void) {
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
-		if (!input || msTicks - lastClick < 30)
+		if (!input || msTicks - lastClick < 100)
 			continue;
 
 		if (button_pressed(input, BUTTON_NAVIGATION_UP)) {

@@ -3,6 +3,7 @@
 
 #include "main.h"
 #include "effects.h"
+#include "spish.h"
 
 // TODO: Remove these and include them properly in textdisplay.h
 #define TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100                                  \
