@@ -29,6 +29,9 @@
 
 #define FPGA_SPI_PORT             (FPGA_SPI_CS_PORT)
 
+#define FPGA_SOFT_RESET_PORT      (gpioPortB)
+#define FPGA_SOFT_RESET_PIN       (7U)
+
 #define button_pressed(portInput, button) ((1 << button) & input)
 
 

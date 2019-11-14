@@ -66,7 +66,7 @@ void LCD_NavigateUp() {
 		}
 		printf(">\n");
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		GPIO_PinOutToggle(gpioPortF, 5);
+		GPIO_PinOutToggle(LED_PORT, LED_LEFT);
 	}
 	// If cursor is inline
 	else {
