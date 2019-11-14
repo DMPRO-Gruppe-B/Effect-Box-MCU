@@ -10,7 +10,6 @@
 #include "systime.h"
 
 /* Counts 1ms timeTicks */
-volatile uint32_t lastButton = 0;
 volatile uint32_t lastClick = 0;
 
 void GPIO_Init() {
