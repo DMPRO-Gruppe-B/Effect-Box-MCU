@@ -36,7 +36,7 @@ void setup_effects() {
 	effect_t bitcrusher = create_effect("Bitcrusher", 3);
 	bitcrusher.settings[0] = create_setting(0b00000000, "Bypass", "", 1, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(0b00000001, "Bits", "bits", 0, 1, 0, 10);
-	bitcrusher.settings[2] = create_setting(0b00000010, "Sample int", "", 1, 1, 1, 16);
+	bitcrusher.settings[2] = create_setting(0b00000010, "Rate", "", 0, 1, 0, 15);
 
 	effect_t delay = create_effect("Delay", 2);
 	delay.settings[0] = create_setting(0b00000100, "Bypass", "", 1, 1, 0, 1);
