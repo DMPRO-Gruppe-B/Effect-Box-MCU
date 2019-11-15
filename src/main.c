@@ -77,6 +77,7 @@ int main(void) {
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	reset_fpga();
+	send_all_effects_to_fpga();
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
