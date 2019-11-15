@@ -15,13 +15,15 @@ void send_byte(byte b) {
 }
 
 void send_setting(setting_t *setting) {
-	GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_CS_PIN); // Chip select
-	Delay(1);
-	send_byte(setting->id);
-	send_byte((byte) (setting->value & 0xFF00) >> 8);
-	send_byte((byte) setting->value & 0xFF);
-	Delay(1);
-	GPIO_PinOutSet(FPGA_SPI_PORT, FPGA_SPI_CS_PIN);
-	GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_MOSI_PIN);
-	Delay(1);
+	for (int i = 0; i < 3; i++) {
+		GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_CS_PIN); // Chip select
+		Delay(1);
+		send_byte(setting->id);
+		send_byte((byte) (setting->value & 0xFF00) >> 8);
+		send_byte((byte) setting->value & 0xFF);
+		Delay(1);
+		GPIO_PinOutSet(FPGA_SPI_PORT, FPGA_SPI_CS_PIN);
+		GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_MOSI_PIN);
+		Delay(1);
+	}
 }
