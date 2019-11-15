@@ -43,14 +43,21 @@ void send_all_effects_to_fpga() {
 void setup_effects() {
 	// Bitcrusher
 	effect_t bitcrusher = create_effect("Bitcrusher", 3);
-	bitcrusher.settings[0] = create_setting(0b00000000, "Bypass", "", 1, 1, 0, 1);
-	bitcrusher.settings[1] = create_setting(0b00000001, "Bits", "bits", 0, 1, 0, 10);
-	bitcrusher.settings[2] = create_setting(0b00000010, "Sample int", "", 1, 1, 1, 16);
+	bitcrusher.settings[0] = create_setting(0, "Bypass", "", 1, 1, 0, 1);
+	bitcrusher.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 10);
+	bitcrusher.settings[2] = create_setting(2, "Sample int", "", 1, 1, 1, 16);
 
+	/*
 	effect_t delay = create_effect("Delay", 2);
 	delay.settings[0] = create_setting(0b00000100, "Bypass", "", 1, 1, 0, 1);
 	delay.settings[1] = create_setting(0b00000101, "Delay", "ms", 0, 50, 0, 500);
+	*/
+
+	effect_t tremolo = create_effect("Tremolo", 2);
+	tremolo.settings[0] = create_setting(3, "Bypass", "", 1, 1, 0, 1);
+	tremolo.settings[1] = create_setting(4, "SinMult", "", 18, 1, 8, 40);
 
 	effects[0] = bitcrusher;
-	effects[1] = delay;
+	//effects[1] = delay;
+	effects[1] = tremolo;
 }
