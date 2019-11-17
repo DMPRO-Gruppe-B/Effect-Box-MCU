@@ -72,6 +72,7 @@ int main(void) {
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	reset_fpga();
+	send_all_effects_to_fpga();
 
 	/* Show that the board is ready */
 	GPIO_PinOutSet(LED_PORT, LED_LEFT);

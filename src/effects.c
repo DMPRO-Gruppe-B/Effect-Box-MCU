@@ -35,6 +35,15 @@ effect_t create_effect(char *name, uint8_t n_extra_settings) {
 
 	return e;
 }
+void send_all_effects_to_fpga() {
+	for (int i = 0; i < EFFECTS; i++) {
+		effect_t effect = effects[i];
+		for (int setting_index = 0; setting_index < effect.n_settings; setting_index++) {
+			setting_t *setting = effect.settings[setting_index];
+			send_setting(setting);
+		}
+	}
+}
 
 void setup_effects() {
 	// Bitcrusher
