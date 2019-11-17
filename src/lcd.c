@@ -107,10 +107,10 @@ void LCD_NavigateDown() {
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
 			currentEffect = 0;
 		} else {
-			for (uint8_t i = 0; i < effects[cursor].n_settings; i++) {
+			for (uint8_t i = 0; i < effects[currentEffect].n_settings; i++) {
 				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_DOWN_ONE_LINE);
 			}
-			cursor += effects[cursor].n_settings + 1;
+			cursor += effects[currentEffect].n_settings + 1;
 			currentEffect++;
 		}
 		printf(CURSOR);
