@@ -15,6 +15,7 @@ setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value, ui
 	setting->step_size = step_size;
 	setting->min = min;
 	setting->max = max;
+	setting->map_setting_value = NULL;
 
 	strcpy(setting->name, name);
 	strcpy(setting->unit, unit);
@@ -41,15 +42,24 @@ void send_all_effects_to_fpga() {
 	}
 }
 
+uint16_t map_div10(setting_t *setting) {
+	return setting->value / 10;
+}
+
 void setup_effects() {
 	effect_t bitcrusher = create_effect("Bitcrush", 3);
 	bitcrusher.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrusher.settings[2] = create_setting(2, "Rate", "", 0, 2, 0, 60);
 
-	effect_t delay = create_effect("Delay", 2);
+	effect_t delay = create_effect("Delay", 4);
 	delay.settings[0] = create_setting(3, "Enable", "", 0, 1, 0, 1);
 	delay.settings[1] = create_setting(4, "Delay", "ms", 0, 50, 0, 500);
+	delay.settings[2] = create_setting(7, "Feedback", "%", 0, 10, 0, 100);
+	delay.settings[3] = create_setting(8, "Mix", "%", 0, 10, 0, 100);
+
+	delay.settings[2]->map_setting_value = map_div10;
+	delay.settings[3]->map_setting_value = map_div10;
 
 	effect_t tremolo = create_effect("Tremolo", 2);
 	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
