@@ -24,7 +24,7 @@
 #define BUTTON_DECREMENT          (5)
 
 #define LED_PORT                  (gpioPortC)
-#define LED_LEFT                  (6)
+#define LED_LEFT                  (4)
 #define LED_RIGHT                 (5)
 
 #define FPGA_SPI_PORT             (FPGA_SPI_CS_PORT)

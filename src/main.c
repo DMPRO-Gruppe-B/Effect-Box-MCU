@@ -76,8 +76,6 @@ int main(void) {
 	/* Show that the board is ready */
 	GPIO_PinOutSet(LED_PORT, LED_LEFT);
 
-	while (1);
-
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
 		if (!input || msTicks - lastClick < 100)
