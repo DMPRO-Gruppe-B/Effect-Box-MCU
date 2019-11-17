@@ -48,8 +48,8 @@ void send_all_effects_to_fpga() {
 void setup_effects() {
 	// Bitcrusher
 	effect_t bitcrusher = create_effect("Bitcrusher", 2);
-	bitcrusher.settings[1] = create_setting(0b00000001, "Bits", "bits", 0, 1, 0, 15);
-	bitcrusher.settings[2] = create_setting(0b00000010, "Rate", "x2", 0, 1, 0, 15);
+	bitcrusher.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
+	bitcrusher.settings[2] = create_setting(2, "Rate", "", 0, 2, 0, 60);
 
 	effect_t delay = create_effect("Delay", 1);
 	delay.settings[1] = create_setting(0b00000101, "Delay", "ms", 0, 50, 0, 500);
