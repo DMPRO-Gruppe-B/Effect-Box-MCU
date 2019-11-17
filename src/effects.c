@@ -33,10 +33,10 @@ effect_t create_effect(char *name, uint8_t n_settings) {
 
 void setup_effects() {
 	// Bitcrusher
-	effect_t bitcrusher = create_effect("Bitcrusher", 3);
+	effect_t bitcrusher = create_effect("Bitcrush", 3);
 	bitcrusher.settings[0] = create_setting(0b00000000, "Bypass", "", 1, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(0b00000001, "Bits", "bits", 0, 1, 0, 15);
-	bitcrusher.settings[2] = create_setting(0b00000010, "Rate", "x2", 0, 1, 0, 15);
+	bitcrusher.settings[2] = create_setting(0b00000010, "Rate", "", 0, 2, 0, 60);
 
 	effect_t delay = create_effect("Delay", 2);
 	delay.settings[0] = create_setting(0b00000100, "Bypass", "", 1, 1, 0, 1);
