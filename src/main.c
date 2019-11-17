@@ -39,8 +39,9 @@ void GPIO_Init() {
 
 void reset_fpga() {
 	GPIO_PinOutSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
-	Delay(50);
+	Delay(10);
 	GPIO_PinOutClear(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
+	Delay(10);
 }
 
 int main(void) {
