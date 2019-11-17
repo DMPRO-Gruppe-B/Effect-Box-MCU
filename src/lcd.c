@@ -123,7 +123,7 @@ void LCD_NavigateDown() {
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 			for (int i = 0; i < n_settings - 1; i++) {
 				printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-				cursor++;
+				cursor--;
 			}
 			printf(INLINE_CURSOR);
 			printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
