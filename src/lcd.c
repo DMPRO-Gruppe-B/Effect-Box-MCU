@@ -66,7 +66,6 @@ void LCD_NavigateUp() {
 		}
 		printf(">\n");
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		GPIO_PinOutToggle(LED_PORT, LED_LEFT);
 	}
 	// If cursor is inline
 	else {
@@ -116,7 +115,6 @@ void LCD_NavigateDown() {
 		}
 		printf(CURSOR);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
-		GPIO_PinOutToggle(LED_PORT, LED_LEFT);
 	} else {
 		uint8_t n_settings = effects[currentEffect].n_settings;
 		// Current setting is last setting: Should wrap around to first setting
@@ -181,7 +179,7 @@ void LCD_IncrementValue() {
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 		send_setting(setting);
-		GPIO_PinOutToggle(LED_PORT, LED_RIGHT);
+		update_effect_led();
 	}
 }
 
@@ -197,6 +195,6 @@ void LCD_DecrementValue() {
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 		send_setting(setting);
-		GPIO_PinOutToggle(LED_PORT, LED_RIGHT);
+		update_effect_led();
 	}
 }
