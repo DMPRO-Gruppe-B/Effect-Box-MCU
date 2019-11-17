@@ -39,8 +39,9 @@ void GPIO_Init() {
 
 void reset_fpga() {
 	GPIO_PinOutSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
-	Delay(50);
+	Delay(10);
 	GPIO_PinOutClear(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
+	Delay(10);
 }
 
 int main(void) {
@@ -67,12 +68,12 @@ int main(void) {
 
 	setup_effects();
 
-	LCD_InitialRender();
-
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	reset_fpga();
 	send_all_effects_to_fpga();
+
+	LCD_InitialRender();
 
 	/* Show that the board is ready */
 	GPIO_PinOutSet(LED_PORT, LED_LEFT);

@@ -1,4 +1,5 @@
 #include "effects.h"
+#include "spish.h"
 
 effect_t effects[EFFECTS];
 uint8_t n_settings = 0;
@@ -22,17 +23,12 @@ setting_t *create_setting(uint8_t id, char *name, char *unit, uint16_t value, ui
 	return setting;
 }
 
-effect_t create_effect(char *name, uint8_t n_extra_settings) {
+effect_t create_effect(char *name, uint8_t n_settings) {
 	effect_t e;
-	uint8_t n_settings = n_extra_settings + 1;
 	e.n_settings = n_settings;
 	e.name = malloc(strlen(name) + 1);
 	strcpy(e.name, name);
 	e.settings = malloc(n_settings * sizeof(setting_t *));
-
-	// Add implicit enable setting
-	e.settings[ENABLE_SETTING_ID] = create_setting(0b00000000, "Enable", "", 0, 1, 0, 1);
-
 	return e;
 }
 void send_all_effects_to_fpga() {
@@ -46,16 +42,22 @@ void send_all_effects_to_fpga() {
 }
 
 void setup_effects() {
-	// Bitcrusher
-	effect_t bitcrusher = create_effect("Bitcrusher", 2);
+	effect_t bitcrusher = create_effect("Bitcrush", 3);
+	bitcrusher.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrusher.settings[2] = create_setting(2, "Rate", "", 0, 2, 0, 60);
 
-	effect_t delay = create_effect("Delay", 1);
-	delay.settings[1] = create_setting(0b00000101, "Delay", "ms", 0, 50, 0, 500);
+	effect_t delay = create_effect("Delay", 2);
+	delay.settings[0] = create_setting(3, "Enable", "", 0, 1, 0, 1);
+	delay.settings[1] = create_setting(4, "Delay", "ms", 0, 50, 0, 500);
+
+	effect_t tremolo = create_effect("Tremolo", 2);
+	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
+	tremolo.settings[1] = create_setting(6, "SinMult", "", 18, 1, 8, 40);
 
 	effects[0] = bitcrusher;
 	effects[1] = delay;
+	effects[2] = tremolo;
 }
 
 void update_effect_led() {
