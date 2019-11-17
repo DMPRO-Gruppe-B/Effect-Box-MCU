@@ -19,10 +19,6 @@ void GPIO_Init() {
 	GPIO_PinModeSet(LED_PORT, LED_LEFT, gpioModePushPull, 0);
 	GPIO_PinModeSet(LED_PORT, LED_RIGHT, gpioModePushPull, 0);
 
-	/* Turn on LEDs */
-	GPIO_PinOutSet(LED_PORT, LED_LEFT);
-	GPIO_PinOutSet(LED_PORT, LED_RIGHT);
-
 	/* Setup buttons */
 
 	GPIO_PinModeSet(BUTTON_PORT, BUTTON_NAVIGATION_UP, gpioModeInput, 0);
@@ -69,14 +65,17 @@ int main(void) {
 			;
 	}
 
-	// Clear LED to see that program did not fail
-	GPIO_PinOutClear(LED_PORT, LED_LEFT);
 	setup_effects();
 
 	LCD_InitialRender();
+
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
 	reset_fpga();
+	send_all_effects_to_fpga();
+
+	/* Show that the board is ready */
+	GPIO_PinOutSet(LED_PORT, LED_LEFT);
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
