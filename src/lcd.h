@@ -34,6 +34,5 @@ void LCD_NavigateIn();
 void LCD_NavigateOut();
 void LCD_IncrementValue();
 void LCD_DecrementValue();
-int *getEffectIndices();
 
 #endif /* SRC_LCD_H_ */
