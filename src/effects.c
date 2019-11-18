@@ -53,6 +53,7 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 void setup_effects() {
 	effect_t distortion = create_effect("Distortion", 1);
 	distortion.settings[0] = create_setting(13, "Amplitude", "%", 0, 10, 0, 100);
+	distortion.settings[0]->map_setting_value = map_div10;
 
 	effect_t bitcrush = create_effect("Bitcrush", 4);
 	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
