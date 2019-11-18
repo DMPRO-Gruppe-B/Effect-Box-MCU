@@ -50,6 +50,10 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 	return (setting->value * 32)/360;
 }
 
+uint16_t map_tremolo_depth(setting_t *setting) {
+	return setting->value * 10;
+}
+
 void setup_effects() {
 	effect_t bitcrusher = create_effect("Bitcrush", 3);
 	bitcrusher.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
@@ -68,9 +72,10 @@ void setup_effects() {
 	effect_t tremolo = create_effect("Tremolo", 3);
 	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
 	tremolo.settings[1] = create_setting(6, "Rate", "ms", 225, 45, 90, 540);
-	tremolo.settings[2] = create_setting(9, "Depth", "", 2, 1, 2, 4);
+	tremolo.settings[2] = create_setting(9, "Depth", "%", 10, 1, 0, 10);
 
 	tremolo.settings[1]->map_setting_value = map_tremolo_rate;
+	tremolo.settings[2]->map_setting_value = map_tremolo_depth;
 
 	effects[0] = bitcrusher;
 	effects[1] = delay;
