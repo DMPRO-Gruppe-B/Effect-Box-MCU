@@ -27,8 +27,26 @@ bool isEffectIndex() {
 	return false;
 }
 
+void LCD_SplashScreen() {
+	for (uint8_t i = 0; i < 5; i++) {
+		printf("\n");
+	}
+	printf("  The Effect Box IV\n");
+	printf("  Signature Edition\n");
+	for (uint8_t i = 0; i < 7; i++) {
+		printf("\n");
+	}
+	printf("  NTNU TDT4295 2019\n");
+}
+
 void LCD_InitialRender() {
 	calculateEffectIndices();
+
+	// Clear splash screen
+	for (uint8_t i = 0; i < 16; i++) {
+		printf("\n");
+	}
+	printf(TEXTDISPLAY_ESC_SEQ_CURSOR_HOME_VT100);
 
 	printf(CURSOR_LINE, effects[0].name);
 	for (uint8_t i = 0; i < effects[0].n_settings; i++) {
