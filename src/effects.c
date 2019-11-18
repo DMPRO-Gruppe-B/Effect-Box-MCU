@@ -53,7 +53,7 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 void setup_effects() {
 	effect_t bitcrush = create_effect("Bitcrush", 4);
 	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
-	bitcrush.settings[1] = create_setting(7, "Mix", "%", 0, 10, 0, 100);
+	bitcrush.settings[1] = create_setting(10, "Mix", "%", 0, 10, 0, 100);
 	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrush.settings[3] = create_setting(2, "Rate", "", 0, 2, 0, 60);
 
