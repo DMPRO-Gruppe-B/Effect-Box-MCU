@@ -52,27 +52,27 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 
 void setup_effects() {
 	effect_t distortion = create_effect("Distortion", 1);
-	distortion.settings[0] = create_setting(13, "Amplitude", "%", 0, 10, 0, 100);
+	distortion.settings[0] = create_setting(13, "Amplitude", "%", 100, 10, 0, 100);
 	distortion.settings[0]->map_setting_value = map_div10;
 
 	effect_t bitcrush = create_effect("Bitcrush", 4);
 	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
-	bitcrush.settings[1] = create_setting(10, "Mix", "%", 0, 10, 0, 100);
+	bitcrush.settings[1] = create_setting(10, "Mix", "%", 50, 10, 0, 100);
 	bitcrush.settings[1]->map_setting_value = map_div10;
 	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrush.settings[3] = create_setting(2, "Rate", "", 1, 3, 1, 60);
 
 	effect_t delay = create_effect("Delay", 4);
 	delay.settings[0] = create_setting(3, "Enable", "", 0, 1, 0, 1);
-	delay.settings[1] = create_setting(8, "Mix", "%", 0, 10, 0, 100);
+	delay.settings[1] = create_setting(8, "Mix", "%", 50, 10, 0, 100);
 	delay.settings[1]->map_setting_value = map_div10;
-	delay.settings[2] = create_setting(7, "Feedback", "%", 0, 10, 0, 100);
+	delay.settings[2] = create_setting(7, "Feedback", "%", 50, 10, 0, 100);
 	delay.settings[2]->map_setting_value = map_div10;
 	delay.settings[3] = create_setting(4, "Delay", "ms", 0, 50, 0, 900);
 
 	effect_t tremolo = create_effect("Tremolo", 3);
 	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
-	tremolo.settings[1] = create_setting(9, "Depth", "%", 0, 10, 0, 100);
+	tremolo.settings[1] = create_setting(9, "Depth", "%", 50, 10, 0, 100);
 	tremolo.settings[1]->map_setting_value = map_div10;
 	tremolo.settings[2] = create_setting(6, "Rate", "ms", 225, 45, 90, 540);
 	tremolo.settings[2]->map_setting_value = map_tremolo_rate;
