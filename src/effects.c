@@ -81,20 +81,3 @@ void setup_effects() {
 	effects[2] = delay;
 	effects[3] = tremolo;
 }
-
-void update_effect_led() {
-	// TODO remove, distortion don't have enable
-	uint8_t anyEnabled = 0;
-	for (uint8_t i = 0; i < EFFECTS; i++) {
-		if (effects[i].settings[ENABLE_SETTING_ID]->value) {
-			anyEnabled = 1;
-			break;
-		}
-	}
-
-	if (anyEnabled) {
-		GPIO_PinOutSet(LED_PORT, LED_RIGHT);
-	} else {
-		GPIO_PinOutClear(LED_PORT, LED_RIGHT);
-	}
-}

@@ -197,7 +197,6 @@ void LCD_IncrementValue() {
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 		send_setting(setting);
-		update_effect_led();
 	}
 }
 
@@ -213,6 +212,5 @@ void LCD_DecrementValue() {
 				setting->unit);
 		printf(TEXTDISPLAY_ESC_SEQ_CURSOR_UP_ONE_LINE);
 		send_setting(setting);
-		update_effect_led();
 	}
 }

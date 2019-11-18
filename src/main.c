@@ -49,6 +49,9 @@ int main(void) {
 	CHIP_Init();
 	GPIO_Init();
 
+	/* Enable power LED */
+	GPIO_PinOutSet(LED_PORT, LED_LEFT);
+
 	/* Initialize HFXO with specific parameters */
 	CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
 	CMU_HFXOInit(&hfxoInit);
@@ -78,8 +81,8 @@ int main(void) {
 	/* Show menu */
 	LCD_InitialRender();
 
-	/* Show that the board is ready */
-	GPIO_PinOutSet(LED_PORT, LED_LEFT);
+	/* Enable ready LED */
+	GPIO_PinOutSet(LED_PORT, LED_RIGHT);
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
