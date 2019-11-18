@@ -27,6 +27,7 @@
 #define MILLISECONDS "ms"
 #define BITS "bits"
 
+void LCD_SplashScreen();
 void LCD_InitialRender();
 void LCD_NavigateUp();
 void LCD_NavigateDown();
