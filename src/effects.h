@@ -3,7 +3,7 @@
 
 #include "main.h"
 
-#define EFFECTS 3
+#define EFFECTS 4
 #define ENABLE_SETTING_ID 0
 
 extern effect_t effects[EFFECTS];

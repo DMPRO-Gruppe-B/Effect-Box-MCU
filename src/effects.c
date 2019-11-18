@@ -42,6 +42,11 @@ void send_all_effects_to_fpga() {
 }
 
 void setup_effects() {
+	effect_t distortion = create_effect("Distortion", 3);
+	distortion.settings[0] = create_setting(8, "Enable", "", 0, 1, 0, 1);
+	distortion.settings[1] = create_setting(9, "Mix", "%", 0, 10, 0, 100);
+	distortion.settings[2] = create_setting(10, "Amplitude", "%", 0, 10, 0, 100);
+
 	effect_t bitcrush = create_effect("Bitcrush", 4);
 	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
 	bitcrush.settings[1] = create_setting(7, "Mix", "%", 0, 10, 0, 100);
@@ -56,9 +61,10 @@ void setup_effects() {
 	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
 	tremolo.settings[1] = create_setting(6, "SinMult", "", 18, 1, 8, 40);
 
-	effects[0] = bitcrush;
-	effects[1] = delay;
-	effects[2] = tremolo;
+	effects[0] = distortion;
+	effects[1] = bitcrush;
+	effects[2] = delay;
+	effects[3] = tremolo;
 }
 
 void update_effect_led() {
