@@ -19,8 +19,14 @@ void send_setting(setting_t *setting) {
 	static uint8_t data_length = 4;
 	uint8_t data[data_length];
 	data[0] = setting->id;
-	data[1] = (setting->value & 0xFF00) >> 8;
-	data[2] = setting->value & 0xFF;
+	if (setting->map_setting_value) {
+		uint16_t value = setting->map_setting_value(setting);
+		data[1] = (value & 0xFF00) >> 8;
+		data[2] = value & 0xFF;
+	} else {
+		data[1] = (setting->value & 0xFF00) >> 8;
+		data[2] = setting->value & 0xFF;
+	}
 
 	// Checksum
 	data[3] = 0;
