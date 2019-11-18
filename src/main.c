@@ -45,9 +45,8 @@ void reset_fpga() {
 }
 
 int main(void) {
-	/* Chip errata */
+	/* Setup chip */
 	CHIP_Init();
-
 	GPIO_Init();
 
 	/* Initialize HFXO with specific parameters */
@@ -58,21 +57,25 @@ int main(void) {
 	CMU_ClockSelectSet(cmuClock_HF, cmuSelect_HFXO);
 	CMU_OscillatorEnable(cmuOsc_HFRCO, false, false);
 
+	/* Setup display */
 	DISPLAY_Init();
-
 	/* Retarget stdio to a text display. */
 	if (RETARGET_TextDisplayInit() != TEXTDISPLAY_EMSTATUS_OK) {
-		while (1)
-			;
+		while (1);
 	}
+	LCD_SplashScreen();
 
+	/* Load effects */
 	setup_effects();
 
+	/* Setup clock */
 	SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000);
 
+	/* Reset FPGA and send initial settings */
 	reset_fpga();
 	send_all_effects_to_fpga();
 
+	/* Show menu */
 	LCD_InitialRender();
 
 	/* Show that the board is ready */
