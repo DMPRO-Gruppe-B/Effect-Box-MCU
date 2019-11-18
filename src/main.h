@@ -34,12 +34,11 @@
 
 #define button_pressed(portInput, button) ((1 << button) & input)
 
-
 #define BIT(x) (1U << (x))
 
 typedef unsigned char byte;
 
-typedef struct {
+typedef struct setting {
 	uint8_t id;
 	char *name;
 	char *unit;
@@ -47,6 +46,7 @@ typedef struct {
 	uint16_t step_size;
 	uint16_t min;
 	uint16_t max;
+	uint16_t (*map_setting_value)(struct setting *);
 } setting_t;
 
 typedef struct {
