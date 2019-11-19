@@ -70,11 +70,12 @@ void setup_effects() {
 	distortion.settings[0] = create_setting(13, "Amplitude", "%", 100, 10, 0, 100);
 	distortion.settings[0]->map_setting_value = map_div10;
 
-	effect_t bitcrush = create_effect("Bitcrush", 3);
-	bitcrush.settings[0] = create_setting(10, "Mix", "%", 0, 10, 0, 100);
-	bitcrush.settings[0]->map_setting_value = map_div10;
-	bitcrush.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
-	bitcrush.settings[2] = create_setting(2, "Rate", "", 1, 1, 1, 60);
+	effect_t bitcrush = create_effect("Bitcrush", 4);
+	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
+	bitcrush.settings[1] = create_setting(10, "Mix", "%", 0, 10, 0, 100);
+	bitcrush.settings[1]->map_setting_value = map_div10;
+	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
+	bitcrush.settings[3] = create_setting(2, "Rate", "", 1, 1, 1, 60);
 
 	effects[0] = delay;
 	effects[1] = tremolo;
