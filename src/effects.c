@@ -68,12 +68,13 @@ void setup_effects() {
 	delay.settings[3]->map_setting_value = map_div10;
 
 	effect_t tremolo = create_effect("Tremolo", 3);
-	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
-	tremolo.settings[1] = create_setting(6, "Rate", "ms", 225, 45, 90, 540);
-	tremolo.settings[2] = create_setting(9, "Depth", "%", 0, 10, 0, 100);
+	/* tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1); */
+	tremolo.settings[0] = create_setting(6, "Rate", "ms", 225, 45, 90, 540);
+	tremolo.settings[1] = create_setting(9, "Depth", "%", 0, 10, 0, 100);
+	tremolo.settings[2] = create_setting(14, "Wave Form", "", 0, 1, 0, 3);
 
-	tremolo.settings[1]->map_setting_value = map_tremolo_rate;
-	tremolo.settings[2]->map_setting_value = map_div10;
+	tremolo.settings[0]->map_setting_value = map_tremolo_rate;
+	tremolo.settings[1]->map_setting_value = map_div10;
 
 	effects[0] = bitcrush;
 	effects[1] = delay;
