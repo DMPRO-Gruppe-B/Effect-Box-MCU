@@ -52,12 +52,12 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 
 void setup_effects() {
 	effect_t bitcrusher = create_effect("Bitcrush", 3);
-	bitcrusher.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
+	bitcrusher.settings[0] = create_setting(0, "Bypass", "", 1, 1, 0, 1);
 	bitcrusher.settings[1] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
-	bitcrusher.settings[2] = create_setting(2, "Rate", "", 0, 2, 0, 60);
+	bitcrusher.settings[2] = create_setting(2, "Rate", "", 1, 2, 1, 61);
 
 	effect_t delay = create_effect("Delay", 4);
-	delay.settings[0] = create_setting(3, "Enable", "", 0, 1, 0, 1);
+	delay.settings[0] = create_setting(3, "Bypass", "", 1, 1, 0, 1);
 	delay.settings[1] = create_setting(4, "Delay", "ms", 0, 50, 0, 900);
 	delay.settings[2] = create_setting(7, "Feedback", "%", 0, 10, 0, 100);
 	delay.settings[3] = create_setting(8, "Mix", "%", 0, 10, 0, 100);
