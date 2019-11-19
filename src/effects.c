@@ -52,7 +52,7 @@ uint16_t map_tremolo_rate(setting_t *setting) {
 
 void setup_effects() {
 	effect_t delay = create_effect("Delay", 4);
-	delay.settings[0] = create_setting(3, "Enable", "", 0, 1, 0, 1);
+	delay.settings[0] = create_setting(3, "Bypass", "", 1, 1, 0, 1);
 	delay.settings[1] = create_setting(8, "Mix", "%", 50, 10, 0, 100);
 	delay.settings[1]->map_setting_value = map_div10;
 	delay.settings[2] = create_setting(7, "Feedback", "%", 50, 10, 0, 100);
@@ -60,7 +60,7 @@ void setup_effects() {
 	delay.settings[3] = create_setting(4, "Delay", "ms", 900, 50, 50, 900);
 
 	effect_t tremolo = create_effect("Tremolo", 4);
-	tremolo.settings[0] = create_setting(5, "Enable", "", 0, 1, 0, 1);
+	tremolo.settings[0] = create_setting(5, "Bypass", "", 1, 1, 0, 1);
 	tremolo.settings[1] = create_setting(9, "Depth", "%", 0, 10, 0, 100);
 	tremolo.settings[1]->map_setting_value = map_div10;
 	tremolo.settings[2] = create_setting(6, "Rate", "ms", 225, 45, 90, 540);
@@ -68,7 +68,7 @@ void setup_effects() {
 	tremolo.settings[3] = create_setting(14, "Wave Form", "", 0, 1, 0, 3);
 
 	effect_t bitcrush = create_effect("Dist & Bits", 4);
-	bitcrush.settings[0] = create_setting(0, "Enable", "", 0, 1, 0, 1);
+	bitcrush.settings[0] = create_setting(0, "Bypass", "", 1, 1, 0, 1);
 	bitcrush.settings[1] = create_setting(13, "Amplitude", "%", 100, 10, 0, 100);
 	bitcrush.settings[1]->map_setting_value = map_div10;
 	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
