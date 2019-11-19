@@ -57,7 +57,7 @@ void setup_effects() {
 	delay.settings[1]->map_setting_value = map_div10;
 	delay.settings[2] = create_setting(7, "Feedback", "%", 50, 10, 0, 100);
 	delay.settings[2]->map_setting_value = map_div10;
-	delay.settings[3] = create_setting(4, "Delay", "ms", 0, 50, 0, 900);
+	delay.settings[3] = create_setting(4, "Delay", "ms", 900, 50, 50, 900);
 
 	effect_t tremolo = create_effect("Tremolo", 3);
 	tremolo.settings[0] = create_setting(9, "Depth", "%", 0, 10, 0, 100);
