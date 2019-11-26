@@ -34,6 +34,7 @@ void send_setting(setting_t *setting) {
 		// Ignore overflow
 		data[3] = (data[3] + (uint16_t) data[i]) & 0xFF;
 	}
+	data[3] = ~data[3];
 
 	for (int i = 0; i < 4; i++) {
 		GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_CS_PIN); // Chip select
