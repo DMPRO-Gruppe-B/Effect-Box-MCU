@@ -74,7 +74,7 @@ void setup_effects() {
 	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrush.settings[3] = create_setting(2, "Rate", "", 1, 2, 1, 61);
 
-	effects[0] = delay;
+	effects[0] = bitcrush;
 	effects[1] = tremolo;
-	effects[2] = bitcrush;
+	effects[2] = delay;
 }
