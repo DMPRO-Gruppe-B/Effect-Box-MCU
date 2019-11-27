@@ -36,7 +36,10 @@ void send_setting(setting_t *setting) {
 	}
 	data[3] = ~data[3];
 
-	for (int i = 0; i < 4; i++) {
+	// Activate transmission LED
+	GPIO_PinOutSet(LED_PORT, LED_RIGHT);
+
+	for (int i = 0; i < SPI_TRANSMISSION_COUNT; i++) {
 		GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_CS_PIN); // Chip select
 		Delay(1);
 		for (uint8_t i = 0; i < data_length; i++)
@@ -46,4 +49,6 @@ void send_setting(setting_t *setting) {
 		GPIO_PinOutClear(FPGA_SPI_PORT, FPGA_SPI_MOSI_PIN);
 		Delay(1);
 	}
+
+	GPIO_PinOutClear(LED_PORT, LED_RIGHT);
 }

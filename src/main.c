@@ -41,7 +41,7 @@ void reset_fpga() {
 	GPIO_PinOutSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
 	Delay(10);
 	GPIO_PinOutClear(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
-	Delay(10);
+	Delay(20);
 }
 
 int main(void) {
@@ -80,9 +80,6 @@ int main(void) {
 
 	/* Show menu */
 	LCD_InitialRender();
-
-	/* Enable ready LED */
-	GPIO_PinOutSet(LED_PORT, LED_RIGHT);
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;
