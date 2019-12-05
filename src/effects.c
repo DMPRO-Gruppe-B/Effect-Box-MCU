@@ -72,7 +72,7 @@ void setup_effects() {
 	bitcrush.settings[0] = create_setting(0, "Bypass", "", 1, 1, 0, 1);
 	bitcrush.settings[1] = create_setting(13, "Distortion", "bits", 0, 1, 0, 15);
 	bitcrush.settings[2] = create_setting(1, "Depth", "bits", 0, 1, 0, 15);
-	bitcrush.settings[3] = create_setting(2, "Rate", "div", 1, 2, 1, 61);
+	bitcrush.settings[3] = create_setting(2, "Rate", "div", 1, 2, 1, 63);
 
 	effects[0] = bitcrush;
 	effects[1] = tremolo;
