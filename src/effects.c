@@ -70,7 +70,8 @@ void setup_effects() {
 
 	effect_t bitcrush = create_effect("Bitcrush & Dist.", 4);
 	bitcrush.settings[0] = create_setting(0, "Bypass", "", 1, 1, 0, 1);
-	bitcrush.settings[1] = create_setting(13, "Amplitude", "%", 0, 2, 0, 100);
+	bitcrush.settings[1] = create_setting(13, "Distortion", "%", 0, 10, 0, 100);
+	bitcrush.settings[1]->map_setting_value = map_div10;
 	bitcrush.settings[2] = create_setting(1, "Bits", "bits", 0, 1, 0, 15);
 	bitcrush.settings[3] = create_setting(2, "Rate", "", 1, 2, 1, 61);
 
