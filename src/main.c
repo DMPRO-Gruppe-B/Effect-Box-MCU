@@ -41,13 +41,16 @@ void reset_fpga() {
 	GPIO_PinOutSet(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
 	Delay(10);
 	GPIO_PinOutClear(FPGA_SOFT_RESET_PORT, FPGA_SOFT_RESET_PIN);
-	Delay(10);
+	Delay(20);
 }
 
 int main(void) {
 	/* Setup chip */
 	CHIP_Init();
 	GPIO_Init();
+
+	/* Enable power LED */
+	GPIO_PinOutSet(LED_PORT, LED_LEFT);
 
 	/* Initialize HFXO with specific parameters */
 	CMU_HFXOInit_TypeDef hfxoInit = CMU_HFXOINIT_DEFAULT;
@@ -77,9 +80,6 @@ int main(void) {
 
 	/* Show menu */
 	LCD_InitialRender();
-
-	/* Show that the board is ready */
-	GPIO_PinOutSet(LED_PORT, LED_LEFT);
 
 	while (1) {
 		uint32_t input = (~GPIO_PortInGet(BUTTON_PORT)) & 0b111111;

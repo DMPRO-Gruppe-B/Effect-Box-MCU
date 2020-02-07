@@ -36,6 +36,8 @@
 
 #define BIT(x) (1U << (x))
 
+#define SPI_TRANSMISSION_COUNT 5
+
 typedef unsigned char byte;
 
 typedef struct setting {
